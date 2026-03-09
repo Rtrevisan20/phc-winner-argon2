@@ -104,20 +104,21 @@ output buffers, the low-level API takes in these and additional parameters
 
 There are many additional parameters, but we will highlight three of them here.
 
-1. The `secret` parameter, which is used for [keyed hashing](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code).
+1. The `secret` parameter, which is used for [keyed hashing](
+   https://en.wikipedia.org/wiki/Hash-based_message_authentication_code).
    This allows a secret key to be input at hashing time (from some external
    location) and be folded into the value of the hash. This means that even if
    your salts and hashes are compromised, an attacker cannot brute-force to find
    the password without the key.
 
-2. The `ad` parameter, which is used to fold any additional data into the hash
+3. The `ad` parameter, which is used to fold any additional data into the hash
    value. Functionally, this behaves almost exactly like the `secret` or `salt`
    parameters; the `ad` parameter is folding into the value of the hash.
    However, this parameter is used for different data. The `salt` should be a
    random string stored alongside your password. The `secret` should be a random
    key only usable at hashing time. The `ad` is for any other data.
 
-3. The `flags` parameter, which determines which memory should be securely
+4. The `flags` parameter, which determines which memory should be securely
    erased. This is useful if you want to securely delete the `pwd` or `secret`
    fields right after they are used. To do this set `flags` to either
    `ARGON2_FLAG_CLEAR_PASSWORD` or `ARGON2_FLAG_CLEAR_SECRET`. To change how
